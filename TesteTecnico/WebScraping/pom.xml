@@ -6,7 +6,7 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.4.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>com.IntuitiveCare</groupId>
 	<artifactId>WebScraping</artifactId>
@@ -51,7 +51,7 @@
 			<dependency>
 				<groupId>org.jsoup</groupId>
 				<artifactId>jsoup</artifactId>
-				<version>1.16.1</version> <!-- Confirme a versão atual -->
+				<version>1.16.1</version>
 			</dependency>
 
 			<!-- Spring Boot Starter Cache -->
