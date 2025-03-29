@@ -12,13 +12,13 @@ import java.util.zip.ZipOutputStream;
 public class FileCompressionService {
 
 
-     //Compacta uma lista de arquivos em um único arquivo ZIP.
-    public void comprimirArquivos(String[] filePaths, String outputZipPath) {
-        try (FileOutputStream fos = new FileOutputStream(outputZipPath);
+    //Compacta uma lista de arquivos em um único arquivo ZIP.
+    public void comprimirArquivos(String[] arquivosForZip, String saidaZip) {
+        try (FileOutputStream fos = new FileOutputStream(saidaZip);
              ZipOutputStream zipOut = new ZipOutputStream(fos)) {
 
             // Itera por todos os arquivos fornecidos e adiciona ao ZIP
-            for (String arquivo : filePaths) {
+            for (String arquivo : arquivosForZip) {
                 File arquivoparazip = new File(arquivo);
 
                 // Verifica se o arquivo existe antes de tentar compactar
@@ -29,8 +29,8 @@ public class FileCompressionService {
 
                 // Adiciona o arquivo ao ZIP
                 try (FileInputStream fis = new FileInputStream(arquivoparazip)) {
-                    ZipEntry zipEntry = new ZipEntry(arquivoparazip.getName());
-                    zipOut.putNextEntry(zipEntry);
+                    ZipEntry entradaZip = new ZipEntry(arquivoparazip.getName());
+                    zipOut.putNextEntry(entradaZip);
 
                     byte[] buffer = new byte[1024];
                     int bytesRead;
