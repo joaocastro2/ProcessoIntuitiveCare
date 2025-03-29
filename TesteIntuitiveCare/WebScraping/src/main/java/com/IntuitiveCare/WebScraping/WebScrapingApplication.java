@@ -10,4 +10,6 @@ public class WebScrapingApplication {
 		SpringApplication.run(WebScrapingApplication.class, args);
 	}
 
+
+
 }
