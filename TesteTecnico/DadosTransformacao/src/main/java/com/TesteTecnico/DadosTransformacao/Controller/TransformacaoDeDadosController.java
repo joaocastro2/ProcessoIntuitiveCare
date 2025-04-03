@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
 
-@RestController // Essa anotação garante que os endpoints sejam expostos corretamente
+@RestController
 public class TransformacaoDeDadosController {
 
     @Autowired
