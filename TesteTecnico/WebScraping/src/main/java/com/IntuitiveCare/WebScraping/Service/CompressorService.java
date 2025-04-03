@@ -9,7 +9,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 @Service
-public class FileCompressionService {
+public class CompressorService {
 
 
     //Compacta uma lista de arquivos em um único arquivo ZIP.

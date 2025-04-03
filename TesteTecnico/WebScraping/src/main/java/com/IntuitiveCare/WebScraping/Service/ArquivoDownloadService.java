@@ -7,7 +7,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 @Service
-public class FileDownloadService {
+public class ArquivoDownloadService {
 
     public void downloadArquivo(String fileUrl, String destinationPath) throws Exception {
         try (InputStream in = new URL(fileUrl).openStream();

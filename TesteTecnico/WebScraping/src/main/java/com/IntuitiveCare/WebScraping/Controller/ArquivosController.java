@@ -1,7 +1,7 @@
 package com.IntuitiveCare.WebScraping.Controller;
 
-import com.IntuitiveCare.WebScraping.Service.FileCompressionService;
-import com.IntuitiveCare.WebScraping.Service.FileDownloadService;
+import com.IntuitiveCare.WebScraping.Service.CompressorService;
+import com.IntuitiveCare.WebScraping.Service.ArquivoDownloadService;
 import com.IntuitiveCare.WebScraping.Service.WebScrapingService;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,24 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.net.URL;
 import java.nio.file.Files;
 import java.util.List;
 import org.slf4j.Logger;
 
 @RestController
-public class ScrappingAndCompressionController {
+public class ArquivosController {
 
     @Autowired
     private WebScrapingService webScrapingService;
 
     @Autowired
-    private FileCompressionService fileCompressionService;
+    private CompressorService compressorService;
 
     @Autowired
-    private FileDownloadService fileDownloadService; // Injeta o serviço de download
+    private ArquivoDownloadService arquivoDownloadService; // Injeta o serviço de download
 
     @GetMapping("/baixar-e-comprimir")
     public ResponseEntity<byte[]> baixarEComprimir(@RequestParam String url) {
@@ -47,12 +44,12 @@ public class ScrappingAndCompressionController {
             String caminhoArquivo2 = "Anexo_II.pdf";
 
             //Baixa os arquivos
-            fileDownloadService.downloadArquivo(links.get(0), caminhoArquivo1);
-            fileDownloadService.downloadArquivo(links.get(1), caminhoArquivo2);
+            arquivoDownloadService.downloadArquivo(links.get(0), caminhoArquivo1);
+            arquivoDownloadService.downloadArquivo(links.get(1), caminhoArquivo2);
 
             //Comprime e salva os arquivos
             String caminhoZip = "Anexos.zip";
-            fileCompressionService.comprimirArquivos(new String[]{caminhoArquivo1, caminhoArquivo2}, caminhoZip);
+            compressorService.comprimirArquivos(new String[]{caminhoArquivo1, caminhoArquivo2}, caminhoZip);
 
             File arquivoZip = new File(caminhoZip);
             byte[] conteudoZip = Files.readAllBytes(arquivoZip.toPath());
@@ -66,7 +63,7 @@ public class ScrappingAndCompressionController {
 
             return new ResponseEntity<>(conteudoZip, headers, HttpStatus.OK);
         } catch (Exception e) {
-            Logger registro = LoggerFactory.getLogger(ScrappingAndCompressionController.class);
+            Logger registro = LoggerFactory.getLogger(ArquivosController.class);
             registro.error("Erro ao processar requisição", e);
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
