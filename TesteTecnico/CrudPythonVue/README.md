@@ -27,8 +27,11 @@ Por fim, digite o seguinte caminho no google:
 ```
 Ele irá abrir a pagina com a interface de busca no banco
 
+Teste de requisição postman:
 
-
+```bash
+  http://localhost:5000/buscar/<coluna>=<termo>
+```
 
 ## Passo a passo api
 
